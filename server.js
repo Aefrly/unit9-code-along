@@ -113,3 +113,16 @@ app.delete('/api/books/:id', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+//Want to test Database
+/*const { db, Book, User, Checkout } = require('./database/setup'); 
+
+async function getData(checkoutId) { 
+    const checkoutData = await Checkout.findByPk(checkoutId) 
+    const bookData = await Book.findByPk(checkoutData.bookId) 
+    const userData = await User.findByPk(checkoutData.userId) 
+
+    console.log(`${userData.name} has checked out ${bookData.title} and it is due on ${checkoutData.dueDate}`) 
+} 
+
+getData(1) // "John Smith has checked out The Great Gatsby and it is due on Wed Feb 14 2024 19:00:00 GMT-0500 (Eastern Standard Time)"*/
