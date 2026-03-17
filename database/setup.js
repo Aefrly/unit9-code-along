@@ -98,6 +98,13 @@ const Checkout = db.define('Checkout', {
   }
 });
 
+// Define relationships
+User.hasMany(Checkout, { foreignKey: 'userId' });
+Checkout.belongsTo(User, { foreignKey: 'userId' });
+
+Book.hasMany(Checkout, { foreignKey: 'bookId' });
+Checkout.belongsTo(Book, { foreignKey: 'bookId' });
+
 // Export for use in other files
 module.exports = { db, Book, User, Checkout };
 
