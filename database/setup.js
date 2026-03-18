@@ -62,6 +62,10 @@ const User = db.define('User', {
   isActive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 });
 
