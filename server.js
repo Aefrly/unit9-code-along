@@ -109,6 +109,49 @@ app.delete('/api/books/:id', async (req, res) => {
     }
 });
 
+// POST /api/register - Register new library patron
+app.post('/api/register', async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+    
+        // Check if user with this email already 
+    exists
+        const existingUser = await User.findOne({ 
+    where: { email } });
+        if (existingUser) {
+            return res.status(400).json({ error:
+        'User with this email already exists' });
+        }
+    
+        // Hash the password before storing it
+        const saltRounds = 10;
+        const hashedPassword = await
+    bcrypt.hash(password, saltRounds);
+    
+        // Create new user with hashed password
+        const newUser = await User.create({
+            name,
+            email,
+            password: hashedPassword  // Store the hash, not the original password
+        });
+    
+        // Return success (don't send back the password)
+        res.status(201).json({
+            message: 'User registered successfully',
+            user: {
+                id: newUser.id,
+                name: newUser.name,
+                email: newUser.email
+            }
+        });
+    
+    } catch (error) {
+        console.error('Error registering user:', 
+    error);
+        res.status(500).json({ error: 'Failed to register user' });
+    }
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
