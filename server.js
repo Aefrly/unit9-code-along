@@ -1,6 +1,6 @@
 const express = require('express');
-const { db, Book } = require('./database/setup');
-
+const bcrypt = require('bcryptjs');
+const { sequelize, Book, User, Checkout } = require('./database/setup');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
