@@ -28,6 +28,21 @@ async function testConnection() {
     }
 }
 
+function requireAuth(req, res, next) {
+    if (req.session && req.session.userId) {
+        req.user = {
+            id: req.session.userId,
+            name: req.session.userName,
+            email: req.session.userEmail
+        };
+        next();
+    } else {
+        res.status(401).json({ 
+            error: 'Authentication required. Please log in.' 
+        });
+    }
+}
+
 testConnection();
 
 // BOOK ROUTES
