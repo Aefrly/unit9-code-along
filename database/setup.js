@@ -4,7 +4,7 @@ require('dotenv').config();
 // Create Sequelize instance
 const db = new Sequelize({
     dialect: 'sqlite',
-    storage: `database/${process.env.DB_NAME}` || 'database/library_system.db',
+    storage: `database/${process.env.DB_NAME || 'library_system.db'}`,
     logging: console.log
 });
 
