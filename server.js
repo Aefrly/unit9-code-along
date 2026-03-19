@@ -175,12 +175,20 @@ app.post('/api/login', async (req, res) => {
         }
     
          // Compare provided password with hashed password
-        const isValidPassword = await 
-    bcrypt.compare(password, user.password);
+        const isValidPassword = await bcrypt.compare(password, user.password);
         if (!isValidPassword) {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
-    
+        
+        res.json({
+            message: 'Login successful',
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            }
+        });
+        
         // Password is correct - user is authenticated
         res.json({
             message: 'Login successful',
