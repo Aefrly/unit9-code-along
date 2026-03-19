@@ -135,6 +135,8 @@ app.delete('/api/books/:id', async (req, res) => {
     }
 });
 
+//USER ROUTES
+
 // POST /api/register - Register new library patron
 app.post('/api/register', async (req, res) => {
     try {
@@ -219,6 +221,16 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ error: 'Failed to login' });
     }
 });
+
+// POST /api/logout - User logout
+app.post('/api/logout', (req, res) => { req.session.destroy((err) => { 
+        if(err) { 
+            console.error('Error destroying the session', err); 
+            return res.status(500).json({ error: 'Failed to logout' }) 
+        } 
+        res.json({ message: "Logout successful" }) 
+    }) 
+})
 
 // Start server
 app.listen(PORT, () => {
