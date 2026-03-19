@@ -48,7 +48,7 @@ testConnection();
 // BOOK ROUTES
 
 // GET /api/books - Get all books
-app.get('/api/books', async (req, res) => {
+app.get('/api/books', requireAuth, async (req, res) => {
     try {
         const books = await Book.findAll();
         res.json(books);
