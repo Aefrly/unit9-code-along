@@ -188,7 +188,7 @@ app.post('/api/login', async (req, res) => {
                 email: user.email
             }
         });
-        
+
         // Password is correct - user is authenticated
         res.json({
             message: 'Login successful',
@@ -200,8 +200,7 @@ app.post('/api/login', async (req, res) => {
         });
     
     } catch (error) {
-        console.error('Error logging in user:', 
-    error);
+        console.error('Error logging in user:', error);
         res.status(500).json({ error: 'Failed to login' });
     }
 });
